@@ -1,0 +1,204 @@
+# ClaudeCode Writer Plugin Configuration
+# Version 2.0.0
+
+plugin:
+  name: claudecode-writer
+  version: 2.0.0
+  description: Full-featured content workflow engine for multi-platform content creation
+  author: ClaudeCode Community
+
+# Feature Flags - Enable/disable major features
+features:
+  enabled:
+    - skills           # Reusable capability modules
+    - hooks            # Event-driven automation
+    - workflows        # Multi-step orchestration
+    - analytics        # Performance tracking
+    - scheduling       # Content scheduling
+    - quality_checks   # Automated quality assurance
+
+# Workflow Automation Settings
+workflow_automation:
+  post_write_repurpose: true      # Auto-repurpose after /write command
+  auto_quality_check: true         # Run quality checks on all content
+  auto_seo_optimize: true          # Auto-optimize for SEO
+  auto_save_research: true         # Auto-save research briefs
+  auto_archive: true               # Auto-archive old content (30+ days)
+
+# Platform Connections
+platforms:
+  linkedin:
+    enabled: true
+    auto_publish: false            # Manual approval required
+    api_key_env: LINKEDIN_API_KEY
+
+  twitter:
+    enabled: true
+    auto_publish: false
+    api_key_env: TWITTER_API_KEY
+
+  substack:
+    enabled: true
+    auto_publish: false
+    api_key_env: SUBSTACK_API_KEY
+
+  medium:
+    enabled: false
+    auto_publish: false
+    api_key_env: MEDIUM_API_KEY
+
+# Hook Configuration
+hooks:
+  pre_extract_themes:
+    - validate-rawnotes-exist
+
+  pre_research:
+    - check-research-sources
+    - validate-topic
+
+  pre_write:
+    - quality-check
+    - voice-validation
+    - check-prerequisites
+
+  post_extract_themes:
+    - save-theme-analysis
+    - notify-team
+
+  post_research:
+    - save-research-brief
+    - update-knowledge-base
+
+  post_write:
+    - auto-repurpose-all
+    - seo-optimize
+    - generate-thumbnails
+    - schedule-suggestions
+
+  post_repurpose:
+    - optimize-images
+    - generate-link-trackers
+    - update-content-calendar
+
+  scheduled:
+    daily_digest:
+      time: "09:00"
+      enabled: true
+    weekly_planning:
+      day: "Monday"
+      time: "09:00"
+      enabled: true
+    performance_sync:
+      frequency: "daily"
+      enabled: true
+    archive_cleanup:
+      frequency: "weekly"
+      enabled: true
+
+# Analytics Configuration
+analytics:
+  tracking_enabled: true
+  platforms:
+    - linkedin
+    - twitter
+    - substack
+  sync_frequency: daily
+  metrics:
+    - engagement_rate
+    - reach
+    - clicks
+    - shares
+    - comments
+    - saves
+  reporting:
+    weekly_report: true
+    monthly_report: true
+    email_reports: false
+
+# Quality Settings
+quality:
+  readability:
+    target_grade_level: 8
+    min_score: 60
+
+  seo:
+    min_keyword_density: 0.5
+    max_keyword_density: 2.5
+    require_meta_description: true
+    require_alt_text: true
+
+  voice:
+    strict_mode: false
+    similarity_threshold: 0.7
+
+  grammar:
+    enabled: true
+    auto_fix: false
+
+# Content Settings
+content:
+  default_article_length: 1200
+  auto_generate_title: true
+  auto_generate_excerpt: true
+  auto_suggest_tags: true
+
+  file_naming:
+    pattern: "{type}-{slug}-{date}"
+    date_format: "YYYY-MM-DD"
+
+  versioning:
+    enabled: true
+    max_versions: 10
+
+# Scheduling Settings
+scheduling:
+  default_timezone: "America/New_York"
+  optimal_posting_times:
+    linkedin:
+      - day: "Tuesday"
+        time: "10:00"
+      - day: "Wednesday"
+        time: "12:00"
+      - day: "Thursday"
+        time: "10:00"
+    twitter:
+      - day: "Monday"
+        time: "09:00"
+      - day: "Wednesday"
+        time: "15:00"
+      - day: "Friday"
+        time: "14:00"
+    newsletter:
+      - day: "Tuesday"
+        time: "08:00"
+      - day: "Thursday"
+        time: "08:00"
+
+# AI Settings
+ai:
+  model: "opus"  # Default model for agents
+  temperature: 0.7
+  learning:
+    enabled: true
+    update_frequency: "weekly"
+    min_samples: 10
+
+# Paths (relative to project root)
+paths:
+  content: "content"
+  rawnotes: "content/rawnotes"
+  research: "content/research"
+  drafts: "content/drafts"
+  ready: "content/ready"
+  published: "content/published"
+  archive: "content/archive"
+  context: "context"
+  analytics: "analytics"
+  assets: "assets"
+  templates: ".claude/templates"
+
+# Debug and Development
+debug:
+  verbose_logging: false
+  dry_run: false
+  skip_hooks: false

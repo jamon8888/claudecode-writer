@@ -1,0 +1,193 @@
+# Article Pipeline Workflow
+# Complete workflow from research to multi-platform publication
+
+name: article-pipeline
+description: Complete content creation pipeline from research through publication
+version: 1.0.0
+trigger: manual  # Triggered by /workflow article-pipeline [topic]
+
+# Workflow Steps
+steps:
+  - id: research
+    name: Research Topic
+    command: /research
+    description: Comprehensive research on the topic
+    inputs:
+      topic: ${workflow.topic}
+    outputs:
+      research_brief: ${paths.research}/research-brief-${slug}-${date}.md
+    on_success: write_article
+    on_failure: notify_error
+
+  - id: write_article
+    name: Write Article
+    command: /write
+    description: Create comprehensive long-form article
+    inputs:
+      research_brief: ${research.outputs.research_brief}
+    outputs:
+      article: ${paths.drafts}/article-${slug}-${date}.md
+    hooks:
+      pre: [quality-check, voice-validation]
+      post: [post-write]  # Triggers auto-repurposing
+    on_success: quality_review
+    on_failure: notify_error
+
+  - id: quality_review
+    name: Quality Review
+    description: Comprehensive quality analysis
+    skill: content-analyzer
+    inputs:
+      content: ${write_article.outputs.article}
+    outputs:
+      quality_report: ${paths.drafts}/quality-report-${slug}-${date}.md
+    quality_gate:
+      min_score: 70
+      on_fail: notify_for_revision
+    on_success: seo_optimization
+    on_failure: notify_for_revision
+
+  - id: seo_optimization
+    name: SEO Optimization
+    description: Optimize for search engines
+    skill: seo-optimizer
+    inputs:
+      content: ${write_article.outputs.article}
+      primary_keyword: ${workflow.keyword}
+    outputs:
+      seo_report: ${paths.drafts}/seo-report-${slug}-${date}.md
+    on_success: voice_check
+    on_failure: continue  # SEO issues are warnings, not blockers
+
+  - id: voice_check
+    name: Voice Consistency Check
+    description: Ensure brand voice consistency
+    skill: voice-matcher
+    inputs:
+      content: ${write_article.outputs.article}
+    outputs:
+      voice_report: ${paths.drafts}/voice-report-${slug}-${date}.md
+    quality_gate:
+      min_score: 65
+    on_success: repurpose_platforms
+    on_failure: notify_for_revision
+
+  - id: repurpose_platforms
+    name: Repurpose to All Platforms
+    description: Create platform-specific versions (handled by post-write hook)
+    type: parallel
+    substeps:
+      - agent: linkedin-repurposer
+        input: ${write_article.outputs.article}
+        output: ${paths.drafts}/linkedin-${slug}-${date}.md
+
+      - agent: newsletter-repurposer
+        input: ${write_article.outputs.article}
+        output: ${paths.drafts}/newsletter-${slug}-${date}.md
+
+      - agent: conversational-repurposer
+        input: ${write_article.outputs.article}
+        output: ${paths.drafts}/social-${slug}-${date}.md
+    on_success: generate_assets
+    on_failure: continue  # Partial success acceptable
+
+  - id: generate_assets
+    name: Generate Asset Suggestions
+    description: Suggest images, graphics for each platform
+    skill: asset-suggester
+    inputs:
+      article: ${write_article.outputs.article}
+      platforms: [linkedin, newsletter, social]
+    outputs:
+      asset_suggestions: ${paths.drafts}/assets-${slug}-${date}.md
+    on_success: schedule_suggestions
+    on_failure: continue
+
+  - id: schedule_suggestions
+    name: Generate Schedule Suggestions
+    description: Recommend optimal publishing schedule
+    skill: content-scheduler
+    inputs:
+      platforms: [linkedin, newsletter, twitter]
+      content_type: article_suite
+    outputs:
+      schedule: ${paths.drafts}/schedule-${slug}-${date}.md
+    on_success: create_summary
+    on_failure: continue
+
+  - id: create_summary
+    name: Create Workflow Summary
+    description: Comprehensive summary of all outputs
+    type: summary
+    inputs:
+      all_outputs: ${*.outputs}
+      all_reports: ${*.quality_reports}
+    outputs:
+      summary: ${paths.drafts}/summary-${slug}-${date}.md
+    on_success: notify_complete
+    on_failure: notify_error
+
+  - id: notify_complete
+    name: Workflow Complete Notification
+    type: notification
+    message: |
+      ✓ Article Pipeline Complete!
+
+      Article: ${write_article.outputs.article}
+      Quality: ${quality_review.score}/100
+      SEO: ${seo_optimization.score}/100
+      Voice: ${voice_check.score}/100
+
+      Platform versions:
+      - LinkedIn: ${repurpose_platforms.linkedin.output}
+      - Newsletter: ${repurpose_platforms.newsletter.output}
+      - Social: ${repurpose_platforms.social.output}
+
+      All files in: ${paths.drafts}/
+      Summary: ${create_summary.outputs.summary}
+
+      Next: Review and schedule for publication
+
+# Error Handling
+error_handling:
+  strategy: continue_on_non_critical
+  critical_failures:
+    - research
+    - write_article
+  non_critical:
+    - seo_optimization
+    - generate_assets
+    - schedule_suggestions
+
+# Workflow Variables
+variables:
+  topic: required
+  keyword: optional
+  slug: auto_generate_from_topic
+  date: auto_current_date
+
+# Estimated Duration
+estimated_duration: 10-15 minutes
+
+# Requirements
+requirements:
+  skills:
+    - content-analyzer
+    - seo-optimizer
+    - voice-matcher
+    - asset-suggester
+    - content-scheduler
+  agents:
+    - linkedin-repurposer
+    - newsletter-repurposer
+    - conversational-repurposer
+  context:
+    - writing-examples.md
+    - research-sources.md
+
+# Success Criteria
+success:
+  - article_created: true
+  - quality_score: >= 70
+  - platform_versions: >= 2
+  - summary_generated: true
