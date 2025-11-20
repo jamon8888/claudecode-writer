@@ -1,310 +1,396 @@
-# Claude Code Writing System
+# ClaudeCode Writer v2.0
 
-## What This Template Does for Claude Code Users
+**A complete content workflow engine for Claude Code** - Transform ideas into multi-platform content with automated research, writing, optimization, and repurposing.
 
-**This template turns Claude Code into your personal content creation system** - a smart writing assistant that learns your unique voice and automatically adapts your ideas for every platform you use.
+[![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)](CHANGELOG.md)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Claude Code](https://img.shields.io/badge/Claude%20Code-Plugin-purple.svg)](https://claude.ai/code)
 
-Think of it as having a team of specialized writers who all know exactly how you write and what your audience expects. You provide the idea, and the system handles everything from research to platform-specific optimization.
+## 🚀 What This Does
 
-## How It Enables You to Build a Writing System
+ClaudeCode Writer is a **full-featured plugin** that turns Claude Code into your personal content creation system:
 
-The template provides a complete, ready-to-use architecture that works immediately:
+- 📝 **One command** creates an article + LinkedIn post + newsletter + social media content
+- 🎯 **Skills system** provides reusable capabilities (analysis, SEO, voice matching)
+- 🔄 **Hooks system** automates workflows (quality checks, repurposing, scheduling)
+- 🤖 **AI-powered** research, optimization, and multi-platform adaptation
+- 📊 **Quality gates** ensure consistent brand voice and standards
+- 🎨 **Learns your voice** from examples to maintain authenticity
 
-1. **Voice Learning**: Add a few examples of your existing writing, and Claude learns your style
-2. **Smart Research**: Tell it your favorite sources, and it checks them first for relevant insights
-3. **Automated Workflow**: Simple commands like `/research` and `/write` handle the entire process
-4. **Platform Specialists**: Built-in agents that know exactly how to optimize for LinkedIn, newsletters, and social media
+### What's New in v2.0
 
-No coding required. No complex setup. Just add your examples and start writing.
+✨ **Automated repurposing** - `/write` now creates ALL platform versions automatically
+✨ **Quality checks** - Auto-validates content before saving
+✨ **SEO optimization** - Built-in search engine optimization
+✨ **Voice consistency** - Ensures brand voice across all platforms
+✨ **Workflow engine** - Orchestrate complex multi-step processes
+✨ **Configuration system** - Centralized settings and feature flags
 
-## The Magic Workflow
+## 🎯 Perfect For
 
-1. **Capture Ideas**: Drop unorganized thoughts, voice notes, and fragments into `/rawnotes`
-2. **Extract Themes**: `/extract-themes` finds patterns and develops coherent angles from your raw notes
-3. **Research Once**: `/research [your topic]` finds trends, data, and unique angles from your trusted sources
-4. **Write Once**: `/write` creates a comprehensive article in your voice
-5. **Publish Everywhere**: Specialized agents automatically transform your article into:
-   - LinkedIn posts with professional hooks and engagement drivers
-   - Newsletter sections with compelling subject lines and personal touches
-   - Twitter threads that maximize shares and conversations
-   - Podcast Q&A scripts that sound naturally conversational
+- **Content Creators**: Create once, publish everywhere
+- **Thought Leaders**: Build consistent presence across platforms
+- **Newsletter Writers**: Repurpose content efficiently
+- **Marketing Teams**: Maintain brand voice at scale
+- **Solopreneurs**: Maximize content ROI
 
-**Why This Matters:**
-- **Time Savings**: What used to take hours (adapting content for each platform) now takes seconds
-- **Consistency**: Your voice stays authentic across all platforms
-- **Quality**: Each piece is optimized for its specific platform's best practices
-- **Learning System**: The more you use it, the better it understands your style
+## ⚡ Quick Start
 
-**Perfect For:** Content creators, professionals building thought leadership, newsletter writers, or anyone tired of manually reformatting content for different audiences.
+### 1. Install as GitHub Template
 
-## Quick Start
+Click the green **"Use this template"** button on GitHub, or:
 
-### 1. Get This Template
-1. Go to this repository on GitHub
-2. Click the green "Use this template" button (or fork the repository)
-3. Name your new repository (e.g. "my-writing-workspace")
-4. Clone it to your computer:
-   ```bash
-   git clone https://github.com/YOUR-USERNAME/YOUR-REPO-NAME.git
-   cd YOUR-REPO-NAME
-   ```
+```bash
+# Clone the repository
+git clone https://github.com/jamon8888/claudecode-writer.git my-content-workspace
+cd my-content-workspace
+
+# Or use as template
+gh repo create my-content-workspace --template jamon8888/claudecode-writer
+```
 
 ### 2. Install Claude Code
 
-Visit the official site: [anthropic.com/claude-code](https://www.anthropic.com/claude-code)
+If you haven't already:
 
-**Mac:**
 ```bash
-# Install via Homebrew
+# Mac (Homebrew)
 brew install anthropics/claude/claude-code
 
-# Or download directly
-curl -fsSL https://claude.ai/install.sh | sh
+# Or visit https://claude.ai/code for other platforms
 ```
 
-**Windows:**
-1. Download the installer from [claude.ai/code](https://claude.ai/code)
-2. Run the installer and follow the prompts
-3. Open Command Prompt or PowerShell
+### 3. Initialize Your Workspace
 
-**Setup:**
 ```bash
-# Login to your Anthropic account
-claude auth login
-
-# Navigate to your writing workspace
-cd path/to/your/writing-workspace
+# Navigate to your workspace
+cd my-content-workspace
 
 # Start Claude Code
 claude
+
+# In Claude Code, customize your setup:
+# 1. Add your writing examples to context/writing-examples.md
+# 2. Add your research sources to context/research-sources.md
+# 3. (Optional) Customize .claudecode-writer/config.yml
 ```
 
-### 3. Customize Your Workspace
+### 4. Start Creating!
 
-**Add Your Writing Examples** (Most Important!)
-1. Open `context/writing-examples.md`
-2. Add 2-3 examples of your actual posts from each platform
-3. This teaches Claude your voice and style
+```bash
+# Create a complete content suite
+/write "why remote work productivity advice fails"
 
-**Add Your Research Sources**
-1. Open `context/research-sources.md` 
-2. Add your favorite newsletters and news sources
-3. Claude will check these first during research
-
-### 4. Ready to Write!
-
-The system is now ready. No additional setup needed - the commands and agents are built-in.
-
-## Writing Workflow
-
-### Step 1: Capture Raw Ideas
-Add unstructured thoughts, voice notes, meeting insights, and idea fragments to the `/rawnotes` folder. No organization needed - just capture everything.
-
-### Step 2: Extract Themes 
+# Result: Article + LinkedIn + Newsletter + Social versions
+# All saved to content/drafts/ with quality reports
 ```
+
+## 🎬 The v2.0 Workflow
+
+### Before v2.0 (Manual)
+```
+/write "topic"
+→ Get article
+→ Manually repurpose to LinkedIn
+→ Manually repurpose to Newsletter
+→ Manually repurpose to Social
+→ Manually check quality
+→ Manually optimize SEO
+```
+
+### After v2.0 (Automated)
+```
+/write "topic"
+  ↓ [AUTO-TRIGGERED]
+- ✅ Creates article in content/drafts/
+- ✅ Generates LinkedIn version
+- ✅ Generates newsletter version
+- ✅ Generates social media version
+- ✅ Runs quality analysis (87/100)
+- ✅ Performs SEO optimization
+- ✅ Validates voice consistency
+- ✅ Suggests assets and schedule
+- ✅ Creates comprehensive summary
+
+Done in ~30 seconds!
+```
+
+## 📚 Core Commands
+
+### Content Creation
+```bash
+/write [topic]              # Create article + all platform versions (automated)
+/quick-post [platform]      # Rapid single-platform post
+/research [topic]           # Comprehensive research with fact-checking
+/extract-themes             # Analyze raw notes for content ideas
+```
+
+### Content Optimization
+```bash
+/optimize [file]            # Improve quality, SEO, voice
+/analyze-performance        # Review published content metrics
+/schedule [file] [date]     # Schedule publication
+```
+
+### Full command reference in [ARCHITECTURE.md](ARCHITECTURE.md)
+
+## 🎯 Skills System
+
+Reusable capabilities that power commands and hooks:
+
+- **content-analyzer** - Quality, readability, structure analysis
+- **voice-matcher** - Brand voice consistency validation
+- **seo-optimizer** - Search engine optimization
+- **research-aggregator** - Multi-source research synthesis
+
+Skills are invoked automatically or manually via commands.
+
+## 🔄 Hooks System
+
+Event-driven automation:
+
+- **post-write** - Auto-repurposes to all platforms after `/write`
+- **quality-check** - Validates content before saving
+- **daily-digest** - Scheduled workflow summary
+- **voice-validation** - Ensures brand consistency
+
+Configure hooks in `.claudecode-writer/config.yml`
+
+## ⚙️ Configuration
+
+Customize your workflow in `.claudecode-writer/config.yml`:
+
+```yaml
+# Enable/disable features
+features:
+  enabled:
+    - skills
+    - hooks
+    - workflows
+    - analytics
+
+# Workflow automation
+workflow_automation:
+  post_write_repurpose: true    # Auto-repurpose after /write
+  auto_quality_check: true       # Run quality checks
+  auto_seo_optimize: true        # Optimize for SEO
+
+# Quality thresholds
+quality:
+  readability:
+    min_score: 60
+  voice:
+    similarity_threshold: 0.7
+```
+
+## 📁 Directory Structure
+
+```
+.claudecode-writer/          # Plugin configuration
+├── config.yml              # Central settings
+└── cache/                  # Performance cache
+
+.claude/
+├── skills/                 # Reusable capabilities
+│   └── core/              # Analysis, SEO, voice, research
+├── hooks/                  # Event automation
+│   ├── post/              # After-action hooks
+│   ├── quality/           # Quality assurance
+│   └── workflow/          # Scheduled tasks
+├── commands/               # User-facing commands
+├── agents/                 # Platform specialists
+└── workflows/              # Multi-step orchestration
+
+content/
+├── rawnotes/              # Unprocessed ideas
+├── research/              # Research briefs
+├── drafts/                # Work in progress
+├── ready/                 # Ready to publish
+├── published/             # Published content
+└── archive/               # Archived content
+
+context/
+├── writing-examples.md    # Your voice samples (customize!)
+├── research-sources.md    # Priority sources (customize!)
+├── brand-guidelines.md    # Brand voice & standards
+└── seo-keywords.md        # SEO strategy
+```
+
+## 🎓 Examples
+
+### Example 1: Complete Article Pipeline
+
+```bash
+# 1. Add raw ideas to content/rawnotes/
+# 2. Extract themes
 /extract-themes
+
+# 3. Research the topic
+/research "energy management for remote workers"
+
+# 4. Write article (automatic repurposing)
+/write "energy management for remote workers"
+
+# Result:
+# ✓ content/drafts/article-energy-management-2024-11-18.md
+# ✓ content/drafts/linkedin-energy-management-2024-11-18.md
+# ✓ content/drafts/newsletter-energy-management-2024-11-18.md
+# ✓ content/drafts/social-energy-management-2024-11-18.md
+# ✓ content/drafts/quality-report-energy-management-2024-11-18.md
+# ✓ content/drafts/seo-report-energy-management-2024-11-18.md
+# ✓ content/drafts/summary-energy-management-2024-11-18.md
 ```
 
-Claude will:
-- Analyze all your raw notes for patterns
-- Identify recurring themes and interests
-- Surface your unique perspective on topics
-- Create structured content briefs ready for development
+### Example 2: Quick Social Post
 
-### Step 3: Research Your Topic
-```
-/research [theme from extraction or new topic]
+```bash
+/quick-post linkedin "Time blocking doesn't work for remote workers"
+
+# Result: Optimized LinkedIn post ready to publish
+# Saved to: content/ready/linkedin-time-blocking-2024-11-18.md
 ```
 
-Claude will:
-- Check your priority sources first
-- Find current trends and data
-- Identify gaps in existing coverage
-- Suggest unique angles
-- Provide a research brief
+### Example 3: Optimize Existing Content
 
-### Step 4: Write Your Article
-```
-/write [paste the research brief or topic]
-```
+```bash
+/optimize content/drafts/article-productivity-2024-11-18.md
 
-Claude will:
-- Create a comprehensive 800-1500 word article
-- Use current data and trends
-- Match your voice from examples
-- Structure for readability
-
-### Step 5: Repurpose for Each Platform
-
-**LinkedIn Post:**
-```
-Use the linkedin-repurposer agent on this article: [paste article]
+# Result: Comprehensive optimization with recommendations
+# - Readability improvements
+# - SEO enhancements
+# - Voice adjustments
+# - Structure fixes
 ```
 
-**Newsletter Section:**
-```
-Use the newsletter-repurposer agent on this article: [paste article]
-```
+## 🎨 Customization
 
-**Social Media + Podcast Q&A:**
-```
-Use the conversational-repurposer agent for Twitter posts: [paste article]
-```
+### 1. Add Your Voice (Essential!)
 
-## Complete Example Walkthrough
+Edit `context/writing-examples.md`:
+- Add 2-3 examples of your LinkedIn posts
+- Add 1-2 examples of your newsletter
+- Add examples of your social media posts
 
-Let's say you've been collecting scattered thoughts about remote work:
+The more examples you provide, the better Claude matches your voice.
 
-### 1. Raw Notes Collection
-You've added various files to `/rawnotes`:
-- `morning-thoughts-remote-work.md` - Random observations about productivity
-- `client-call-notes.md` - Insights from consulting calls
-- `voice-transcript-commute.md` - Ideas recorded during walks
+### 2. Add Your Research Sources
 
-### 2. Theme Extraction Phase  
-**You:** `/extract-themes`
+Edit `context/research-sources.md`:
+- Add your favorite newsletters
+- Add industry publications
+- Add expert blogs
 
-**Claude responds with:**
-- **Core Theme**: "Productivity advice is failing remote workers"
-- **Unique Angle**: Focus on energy management vs. time management
-- **Supporting Evidence**: Your client stories and personal observations
-- **Content Opportunity**: Challenge traditional productivity advice with practical alternatives
+Claude will check these sources FIRST during research.
 
-### 3. Research Phase
-**You:** `/research productivity advice failing remote workers energy management`
+### 3. Define Your Brand
 
-**Claude responds with:**
-- Current trends (hybrid work, AI tools, async communication)
-- Gap analysis (missing: energy vs. time perspective)
-- Supporting data from recent studies
-- Platform-specific hooks
+Edit `context/brand-guidelines.md`:
+- Define your brand voice attributes
+- Set content standards
+- Specify vocabulary preferences
 
-### 4. Writing Phase
-**You:** `/write` *[paste the research brief]*
+### 4. Configure SEO
 
-**Claude creates:**
-A 1,200-word article titled "Why Productivity Advice is Failing Remote Workers (And What Actually Works)" with:
-- Hook: Traditional productivity advice assumes office environment
-- 3 main sections: Environment design, Energy management, Social connection
-- Current data and examples
-- Your authentic voice and perspective
+Edit `context/seo-keywords.md`:
+- Add primary keywords
+- Define topic clusters
+- Set SEO strategy
 
-### 5. Repurposing Phase
+## 🚀 Advanced Features
 
-**LinkedIn Version:**
-**You:** Use the `linkedin-repurposer` agent on this article
+### Workflow Orchestration
 
-**Claude creates:**
-```
-Most productivity advice for remote workers is still stuck in 2019.
+Create custom workflows in `.claude/workflows/`:
 
-Here's what actually works:
-
-❌ Time blocking (ignores energy rhythms)
-✅ Energy blocking (work with your natural peaks)
-
-❌ Separate home office (not realistic for many)  
-✅ Transition rituals (same psychological effect)
-
-❌ More meetings for connection
-✅ Async check-ins with intention
-
-The biggest shift: Productivity isn't about managing time anymore.
-It's about managing energy and attention in a distributed world.
-
-What's your best remote productivity hack that no one talks about?
-
-#RemoteWork #Productivity #WorkFromHome #FutureOfWork
+```yaml
+name: quick-social
+steps:
+  - research
+  - quick-post
+  - schedule
 ```
 
-**Newsletter Version:**
-**You:** Use the `newsletter-repurposer` agent on this article
+### Custom Skills
 
-**Claude creates:**
-```
-Subject: The productivity advice that's failing you
-Preview: Most remote work tips assume we're still in offices...
+Add your own skills in `.claude/skills/`:
 
-Hey [Name],
+```markdown
+---
+name: my-custom-skill
+description: Does something amazing
+---
 
-I've been thinking about why so much productivity advice feels useless these days.
-
-Most of it assumes we're still working in offices with predictable schedules and endless coffee refills.
-
-But remote work changed everything...
-
-[Full newsletter section with personal tone, scannable format, clear CTA]
+# My Custom Skill
+[Your skill logic]
 ```
 
-**Social Media Version:**
-**You:** Use the `conversational-repurposer` agent for social media on this article
+### Custom Hooks
 
-**Claude creates:**
-```
-Platform: Twitter/X
+Add automation in `.claude/hooks/`:
 
-Hot take: "Time blocking" doesn't work for remote workers.
+```markdown
+---
+name: my-hook
+trigger: after_write
+---
 
-Try "energy blocking" instead.
-
-Schedule deep work when YOU naturally focus best, not when your calendar says you should.
-
-Game changer.
+# My Hook
+[Your automation logic]
 ```
 
-## Tips for Success
+## 📖 Documentation
 
-1. **Start with examples**: The better your writing examples, the better Claude matches your voice
-2. **Be specific in research**: "social media marketing" vs "TikTok marketing for B2B SaaS"  
-3. **Iterate on repurposing**: Ask Claude to make posts shorter, longer, or adjust tone
-4. **Save good outputs**: Copy successful posts back to your examples file
+- **[ARCHITECTURE.md](ARCHITECTURE.md)** - Complete plugin architecture
+- **[MIGRATION.md](MIGRATION.md)** - Upgrade from v1.0
+- **[CHANGELOG.md](CHANGELOG.md)** - Version history
+- **[CONTRIBUTING.md](CONTRIBUTING.md)** - Contribution guide
 
-## File Structure
+## 🆘 Troubleshooting
 
-```
-writing-workspace/
-├── README.md                   # This guide
-├── CLAUDE.md                  # Instructions for Claude
-├── .claude/
-│   ├── agents/               # Platform specialists
-│   └── commands/            # Research & writing workflows
-├── context/
-│   ├── writing-examples.md  # Your voice samples
-│   └── research-sources.md  # Priority sources
-├── rawnotes/                 # Unprocessed ideas & voice notes
-└── drafts/                  # Your work in progress
-```
+### "Content doesn't match my voice"
+→ Add more examples to `context/writing-examples.md`
 
-## Troubleshooting
+### "Quality checks too strict"
+→ Adjust thresholds in `.claudecode-writer/config.yml`
 
-**"Claude doesn't sound like me"**
-→ Add more diverse writing examples to `context/writing-examples.md`
+### "Hooks not running"
+→ Verify `features.enabled: [hooks]` in config
 
-**"Research feels generic"**  
+### "Research feels generic"
 → Add specific sources to `context/research-sources.md`
 
-**"Posts are too long/short"**
-→ Give Claude specific feedback: "Make this 50% shorter" or "Add more detail"
+## 🤝 Contributing
 
-**Need help?**
-→ Type `/help` in Claude Code for assistance
+Contributions welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for:
+- How to improve skills and workflows
+- Testing requirements
+- Submission process
 
-## What's Next?
+## 📜 License
 
-Once you're comfortable with the basic workflow:
-- Experiment with different research angles
-- Try combining multiple articles into series
-- Use Claude to analyze what content performs best
-- Adapt the agents for other platforms you use
+MIT License - See [LICENSE](LICENSE) file
 
-Happy writing! 🚀
+## 🙏 Acknowledgments
 
-## Contributing
+Built for the Claude Code community by content creators, for content creators.
 
-We welcome contributions that improve the writing quality and research capabilities of this template! See our [Contributing Guidelines](CONTRIBUTING.md) for details on:
+## 🔗 Links
 
-- How to improve agent prompts and workflows
-- Testing requirements and submission process  
-- What kinds of contributions we're looking for
+- **Documentation**: [Full docs](ARCHITECTURE.md)
+- **Issues**: [Report bugs](https://github.com/jamon8888/claudecode-writer/issues)
+- **Discussions**: [Community forum](https://github.com/jamon8888/claudecode-writer/discussions)
+- **Claude Code**: [Official site](https://claude.ai/code)
 
-Help make this system better for content creators everywhere!
+---
+
+**Ready to 10x your content creation?** Get started now! 🚀
+
+```bash
+# Use this template
+gh repo create my-content-workspace --template jamon8888/claudecode-writer
+cd my-content-workspace
+claude
+
+# Start creating
+/write "your first topic"
+```
