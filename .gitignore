@@ -1,0 +1,68 @@
+# ClaudeCode Writer .gitignore
+
+# Cache and temporary files
+.claudecode-writer/cache/*
+.claudecode-writer/state.json
+*.tmp
+*.swp
+*~
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-*
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# API keys and secrets (never commit these!)
+**/api-keys.txt
+**/credentials.json
+**/secrets.yml
+
+# Personal notes (optional - uncomment if you want to keep personal notes private)
+# content/rawnotes/*.md
+# content/drafts/*-personal-*.md
+
+# Analytics data (optional - uncomment if you don't want to track)
+# analytics/reports/*.json
+# analytics/insights/*.json
+
+# Published content (optional - uncomment if you track published elsewhere)
+# content/published/*
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependencies (if you add any)
+node_modules/
+vendor/
+
+# Build outputs (if you add build processes)
+dist/
+build/
+*.bundle.js
+
+# Keep important directories
+!.claude/
+!.claudecode-writer/config.yml
+!content/rawnotes/.gitkeep
+!content/research/.gitkeep
+!content/drafts/.gitkeep
+!content/ready/.gitkeep
+!content/published/.gitkeep
+!content/archive/.gitkeep
