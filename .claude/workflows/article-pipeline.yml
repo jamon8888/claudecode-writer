@@ -56,8 +56,18 @@ steps:
       primary_keyword: ${workflow.keyword}
     outputs:
       seo_report: ${paths.drafts}/seo-report-${slug}-${date}.md
-    on_success: voice_check
+    on_success: log_seo_warnings
     on_failure: continue  # SEO issues are warnings, not blockers
+
+  - id: log_seo_warnings
+    name: Log SEO Warnings
+    description: Log or surface SEO warnings for post-publication review
+    skill: logger
+    inputs:
+      seo_report: ${seo_optimization.outputs.seo_report}
+    outputs:
+      logged_seo_report: ${paths.logs}/seo-warnings-${slug}-${date}.log
+    on_success: voice_check
 
   - id: voice_check
     name: Voice Consistency Check
